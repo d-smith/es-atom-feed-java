@@ -11,7 +11,9 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class JdbcAtomRepository implements AtomRepository  {
     private String linkURLBase;
@@ -65,6 +67,11 @@ public class JdbcAtomRepository implements AtomRepository  {
         return jdbcTemplate.queryForObject("select feedid from feed_state", String.class);
     }
 
+    private String previousFeed(String feedid) {
+        return jdbcTemplate.queryForObject("select previous from feeds where feedid = ?",
+                String.class, feedid);
+    }
+
     @Override
     public Feed retrieveCurrentFeed() {
         String feedId = currentFeed();
@@ -76,6 +83,28 @@ public class JdbcAtomRepository implements AtomRepository  {
         feed.setId(feedId);
         feed.setTitle("Event store feed");
         feed.setUpdated(dateFormat.format(new Date()));
+
+        List<Link> links = new ArrayList<>();
+        feed.setLink(links);
+
+        Link self = new Link();
+        self.setRel("self");
+        self.setHref(String.format("http://%s/notifications/recent", linkURLBase));
+        links.add(self);
+
+        Link related = new Link();
+        related.setRel("related");
+        related.setHref(String.format("http://%s/notifications/%s", linkURLBase,feedId));
+        links.add(related);
+
+        String previousFeed = previousFeed(feedId);
+
+        Link previous = new Link();
+        previous.setRel("prev-archive");
+        previous.setHref(String.format("http://%s/notifications/%s", linkURLBase,previousFeed));
+        links.add(previous);
+
+        //TODO - add items that are part of the current feed
 
         return feed;
     }

@@ -1,9 +1,12 @@
 package atom;
 
+import java.util.List;
+
 public class Feed {
     String title;
     String id;
     String updated;
+    List<Link> link;
 
     public String getTitle() {
         return title;
@@ -27,5 +30,13 @@ public class Feed {
 
     public void setUpdated(String updated) {
         this.updated = updated;
+    }
+
+    public List<Link> getLink() {
+        return link;
+    }
+
+    public void setLink(List<Link> link) {
+        this.link = link;
     }
 }
