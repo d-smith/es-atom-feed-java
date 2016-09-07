@@ -25,7 +25,10 @@ sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 dependencies {
+    compile files('libs/ojdbc7.jar')
+    compile files('libs/ucp.jar')
     compile("org.springframework.boot:spring-boot-starter-web")
+    compile("org.springframework:spring-jdbc")
     testCompile('org.springframework.boot:spring-boot-starter-test')
 }
 
