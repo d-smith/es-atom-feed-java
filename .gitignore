@@ -1,4 +1,7 @@
 setenv.sh
+seedenv.sh
+consul-template
+dc1env
 
 # Gradle
 # ------

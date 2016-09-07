@@ -1,0 +1,7 @@
+FEED_LINK_URL_BASE={{key "devcenter/dc1/FEED_LINK_URL_BASE"}}
+FEED_DB_USER={{key "devcenter/dc1/FEED_DB_USER"}}
+FEED_DB_PASSWORD={{key "devcenter/dc1/FEED_DB_PASSWORD"}}
+FEED_DB_HOST={{key "devcenter/dc1/FEED_DB_HOST"}}
+FEED_DB_PORT={{key "devcenter/dc1/FEED_DB_PORT"}}
+FEED_DB_SVC={{key "devcenter/dc1/FEED_DB_SVC"}}
+
